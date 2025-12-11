@@ -1,8 +1,8 @@
 
-Device configuration for realme GT Master Exp. Edition
+Device configuration for realme GT Explorer Master Edition
 =========================================
 
-The realme GT Master Exp. Edition (codenamed _"rivena"_) is a high-end smartphone from realme.
+The realme GT Explorer Master Edition (codenamed _"rivena"_) is a high-end smartphone from realme.
 
 It was announced and released in July 2021.
 
@@ -20,9 +20,13 @@ Display | Super AMOLED, 120Hz, HDR10+, DCI-P3 1100 nits (peak), 6.55 inches, 108
 
 ## Device picture
 
-![realme GT Master Exp. Edition](https://fdn2.gsmarena.com/vv/pics/realme/realme-gt-master-explorer-2.jpg "realme GT Master Exp. Edition")
+![realme GT Explorer Master Edition](https://i.postimg.cc/rwRSJQJS/RMX3366.png "realme GT Explorer Master Edition")
 
 ## Credits
+Luke-Corden (Ben-Corden)
+
+youngguo18
+
 SathamHussainM
 
 GarfieldHan (pomelohan)
