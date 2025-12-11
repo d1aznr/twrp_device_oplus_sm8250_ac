@@ -17,6 +17,6 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/twrp_RMX3366.mk
+    $(LOCAL_DIR)/twrp_rivena.mk
 
-COMMON_LUNCH_CHOICES := twrp_RMX3366-eng
+COMMON_LUNCH_CHOICES := twrp_rivena-eng

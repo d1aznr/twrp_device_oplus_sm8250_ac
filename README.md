@@ -2,7 +2,7 @@
 Device configuration for realme GT Master Exp. Edition
 =========================================
 
-The realme GT Master Exp. Edition (codenamed _"RMX3366"_) is a high-end smartphone from realme.
+The realme GT Master Exp. Edition (codenamed _"rivena"_) is a high-end smartphone from realme.
 
 It was announced and released in July 2021.
 
