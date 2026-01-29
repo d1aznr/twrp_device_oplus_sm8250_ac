@@ -15,3 +15,12 @@ ro.crypto.uses_fs_ioc_add_encryption_key=true
 ro.crypto.volume.metadata.method=dm-default-key
 ro.crypto.dm_default_key.options_format.version=2
 ro.crypto.volume.options=::v2
+
+# Device Info
+ro.build.product=RMX3366
+ro.product.model=RMX3366
+ro.product.device=RE546F
+ro.product.product.model=RMX3366
+ro.product.product.device=RE546F
+ro.commonsoft.ota=RE546F
+ro.separate.soft=21615
