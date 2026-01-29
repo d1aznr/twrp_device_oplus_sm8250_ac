@@ -148,6 +148,8 @@ TW_USE_TOOLBOX := true
 TW_EXTRA_LANGUAGES := true
 TARGET_USES_MKE2FS := true
 TW_OZIP_DECRYPT_KEY := 0000
+TW_STATUS_ICONS_ALIGN := center
+TW_CUSTOM_CPU_POS := 166
 TW_INCLUDE_LOGICAL := \
 			my_bigball \
 			my_carrier \
