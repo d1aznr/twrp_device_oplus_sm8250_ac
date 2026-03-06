@@ -22,18 +22,18 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
 # Inherit some common Omni stuff.
 $(call inherit-product, vendor/twrp/config/common.mk)
 
-# Inherit from RMX3366 device
-$(call inherit-product, device/realme/RMX3366/device.mk)
+# Inherit from sm8250_ac device
+$(call inherit-product, device/oplus/sm8250_ac/device.mk)
 
 # Release name
-PRODUCT_RELEASE_NAME := RMX3366
+PRODUCT_RELEASE_NAME := sm8250_ac
 
 ## Device identifier. This must come after all inclusions
-PRODUCT_DEVICE := RMX3366
-PRODUCT_NAME := twrp_RMX3366
-PRODUCT_BRAND := realme
-PRODUCT_MODEL := RMX3366
-PRODUCT_MANUFACTURER := realme
+PRODUCT_DEVICE := sm8250_ac
+PRODUCT_NAME := twrp_sm8250_ac
+PRODUCT_BRAND := OPLUS
+PRODUCT_MODEL := sm8250_ac
+PRODUCT_MANUFACTURER := OPLUS
 
 # HACK: Set vendor patch level
 PRODUCT_PROPERTY_OVERRIDES += \
