@@ -58,4 +58,4 @@ PRODUCT_PACKAGES += \
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/config/usb_gadget/g1/functions/mass_storage.0/lun.%d/file"
 
 # Add TW_DEVICE_VERSION
-TW_DEVICE_VERSION := GT MEE for RUI5
+TW_DEVICE_VERSION := OPLUS-SM8250-AC(A14)
