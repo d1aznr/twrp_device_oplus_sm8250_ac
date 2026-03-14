@@ -16,28 +16,20 @@
 using android::base::GetProperty;
 
 struct ModelInfo {
-    const char* brand;              // ro.product.brand
-    const char* device;             // ro.product.device
-    const char* manufacturer;       // ro.product.manufacturer
-    const char* model;              // ro.product.model
-    const char* base_name;          // ro.product.name
-    const char* commonsoft;         // ro.commonsoft.ota
-    const char* separate;           // ro.separate.soft
-    const char* twversion;          // ro.twrp.device_version
+    const char* brand;
+    const char* model;
+    const char* device;
+    const char* twversion;
 };
 
-const std::unordered_map<std::string, ModelInfo> kModelInfoMap = {
-    {"20061", {"OPPO",    "OP4E5D",       "OPPO",     "PEDM00",       "PEDM00",     "OP4E5D",       "20061",    "OPPO_Find_X3"}                         }, // horee CN
-    {"20161", {"OPPO",    "OP4EC1",       "OPPO",     "PENM00",       "PENM00",     "OP4EC1",       "20161",    "OPPO_Reno6_Pro+"}                      }, // jin CN
-    {"20163", {"OPPO",    "OP4EC1",       "OPPO",     "PENM00",       "PENM00",     "OP4EC1",       "20163",    "OPPO_Reno6_Pro+_Conan_Edition"}        }, // jin_conan CN
-    {"20351", {"OPPO",    "OP4F7FL1",     "OPPO",     "CPH2247",      "CPH2247",    "OP4F7FL1",     "20351",    "OPPO_Reno6_Pro"}                       }, // jin EU
-    {"20352", {"OPPO",    "OP4F7FL1",     "OPPO",     "CPH2247",      "CPH2247",    "OP4F7FL1",     "20352",    "OPPO_Reno6_Pro"}                       }, // jin GLO
-    {"21615", {"realme",  "RE546F",       "realme",   "RMX3366",      "RMX3366",    "RE546F",       "21615",    "realme_GT_Master_Explorer_Edition"}    }, // rivena CN
-    {"21619", {"realme",  "RE5473",       "realme",   "RMX3370",      "RMX3370",    "RE5473",       "21619",    "realme_GT_Neo_2"}                      }, // bitra CN
-    {"2161A", {"realme",  "RE5473",       "realme",   "RMX3370",      "RMX3370",    "RE5473",       "2161A",    "realme_GT_Neo_2_Dragon_Ball_Edition"}  }, // bitra_dragon_ball CN
-    {"2169A", {"realme",  "RE879AL1",     "realme",   "RMX3370",      "RMX3370",    "RE879AL1",     "2169A",    "realme_GT_Neo_2"}                      }, // bitra IN
-    {"2169B", {"realme",  "RE879AL1",     "realme",   "RMX3370",      "RMX3370",    "RE879AL1",     "2169B",    "realme_GT_Neo_2"}                      }, // bitra EU
-    {"0",     {"OPLUS",   "SM8250-AC",    "OPLUS",    "SM8250-AC",    "SM8250-AC",  "SM8250-AC",    "0",        "SM8250-AC"}                            }, // Default
+const std::unordered_map<int, ModelInfo> kModelInfoMap = {
+    {20061,   {"OPPO",       "PEDM00",      "OP4E5D",       "OPPO_Find_X3"}                     }, // horee CN
+    {20161,   {"OPPO",       "PENM00",      "OP4EC1",       "OPPO_Reno6_Pro+"}                  }, // jin CN
+    {20351,   {"OPPO",       "CPH2247",     "OP4F7FL1",     "OPPO_Reno6_Pro"}                   }, // jin EU
+    {21615,   {"realme",     "RMX3366",     "RE546F",       "realme_GT_Master_Explorer_Edition"}}, // rivena CN
+    {21619,   {"realme",     "RMX3370",     "RE5473",       "realme_GT_Neo_2"}                  }, // bitra CN
+    {0x2169A, {"realme",     "RMX3370",     "RE879AL1",     "realme_GT_Neo_2"}                  }, // bitra IN
+    {0,       {"OPLUS",      "SM8250-AC",   "SM8250-AC",    "SM8250-AC"}                        }, // Default
 };
 
 /*
@@ -57,33 +49,57 @@ void OverrideProperty(const char* name, const char* value) {
 }
 
 void SetupModelProperties(const ModelInfo& info) {
-    std::string name = info.base_name;
     struct PropPair {
         const char* key;
         const char* value;
     } props[] = {
         {"ro.product.brand",            info.brand},
-        {"ro.product.device",           info.device},
-        {"ro.product.manufacturer",     info.manufacturer},
+        {"ro.product.manufacturer",     info.brand},
         {"ro.product.model",            info.model},
-        {"ro.product.name",             name.c_str()},
-        {"ro.commonsoft.ota",           info.commonsoft},
-        {"ro.separate.soft",            info.separate},
+        {"ro.product.name",             info.model},
+        {"ro.product.device",           info.device},
+        {"ro.commonsoft.ota",           info.device},
         {"ro.twrp.device_version",      info.twversion},
     };
-    for (const auto& p:props) {
+    for (const auto& p : props) {
         OverrideProperty(p.key, p.value);
     }
 }
 
-void vendor_load_properties() {
-    auto prjname = GetProperty("ro.boot.prjname", "0");
-    auto model_info = kModelInfoMap.find(prjname);
+int get_oplus_prjname() {
+    std::string prj_str = GetProperty("ro.boot.prjname", "");
+    for (char c : prj_str) {
+        if (c >= 'A' && c <= 'F') {
+            return std::strtol(prj_str.c_str(), nullptr, 16);
+        }
+    }
+    return std::strtol(prj_str.c_str(), nullptr, 10);
+}
 
-    // Handle unknown device models
+void vendor_load_properties() {
+    OverrideProperty("ro.separate.soft", GetProperty("ro.boot.prjname", "").c_str());
+    auto prj_val = get_oplus_prjname();
+    auto model_info = kModelInfoMap.find(prj_val);
+
     if (model_info == kModelInfoMap.end()) {
-        LOG(ERROR) << "Unknown prjname: " << prjname << ", using default";
-        model_info = kModelInfoMap.find("0");
+        switch(prj_val) {
+            case 20163:
+                model_info = kModelInfoMap.find(20161);
+                break;
+            case 20352:
+                model_info = kModelInfoMap.find(20351);
+                break;
+            case 0x2161A:
+                model_info = kModelInfoMap.find(21619);
+                break;
+            case 0x2169B:
+                model_info = kModelInfoMap.find(0x2169A);
+                break;
+            // Handle unknown device models
+            default:
+                LOG(ERROR) << "Unknown prjname: " << prj_val << ", using default";
+                model_info = kModelInfoMap.find(0);
+        }  
     }
 
     SetupModelProperties(model_info->second);
