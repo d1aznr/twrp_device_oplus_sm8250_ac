@@ -24,6 +24,8 @@ struct ModelInfo {
 
 const std::unordered_map<int, ModelInfo> kModelInfoMap = {
     {20061,   {"OPPO",       "PEDM00",      "OP4E5D",       "OPPO_Find_X3"}                     }, // horee CN
+    {20135,   {"OPPO",       "PDRM00",      "OP4EA7",       "OPPO_Reno5_Pro+"}                  }, // hima CN
+    {20235,   {"OPPO",       "CPH2207",     "OP4F0BL1",     "OPPO_Find_X3_Neo"}                 }, // hima GLO
     {20161,   {"OPPO",       "PENM00",      "OP4EC1",       "OPPO_Reno6_Pro+"}                  }, // jin CN
     {20351,   {"OPPO",       "CPH2247",     "OP4F7FL1",     "OPPO_Reno6_Pro"}                   }, // jin EU
     {21615,   {"realme",     "RMX3366",     "RE546F",       "realme_GT_Master_Explorer_Edition"}}, // rivena CN
@@ -83,6 +85,10 @@ void vendor_load_properties() {
 
     if (model_info == kModelInfoMap.end()) {
         switch(prj_val) {
+            case 20137:
+            case 20139:
+                model_info = kModelInfoMap.find(20135);
+                break;
             case 20163:
                 model_info = kModelInfoMap.find(20161);
                 break;
