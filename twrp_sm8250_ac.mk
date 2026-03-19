@@ -15,8 +15,9 @@
 #
 
 # Inherit from those products. Most specific first.
-$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/base.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
 
 # Inherit some common Omni stuff.
@@ -24,9 +25,6 @@ $(call inherit-product, vendor/twrp/config/common.mk)
 
 # Inherit from sm8250_ac device
 $(call inherit-product, device/oplus/sm8250_ac/device.mk)
-
-# Release name
-PRODUCT_RELEASE_NAME := sm8250_ac
 
 ## Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := sm8250_ac

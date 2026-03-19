@@ -28,7 +28,7 @@ const std::unordered_map<int, ModelInfo> kModelInfoMap = {
     {20235,   {"OPPO",       "CPH2207",     "OP4F0BL1",     "OPPO_Find_X3_Neo"}                 }, // hima GLO
     {20161,   {"OPPO",       "PENM00",      "OP4EC1",       "OPPO_Reno6_Pro+"}                  }, // jin CN
     {20351,   {"OPPO",       "CPH2247",     "OP4F7FL1",     "OPPO_Reno6_Pro"}                   }, // jin EU
-    {21615,   {"realme",     "RMX3366",     "RE546F",       "realme_GT_Master_Explorer_Edition"}}, // rivena CN
+    {21615,   {"realme",     "RMX3366",     "RE546F",       "realme_GT_Master_Explorer"}        }, // rivena CN
     {21619,   {"realme",     "RMX3370",     "RE5473",       "realme_GT_Neo_2"}                  }, // bitra CN
     {0x2169A, {"realme",     "RMX3370",     "RE879AL1",     "realme_GT_Neo_2"}                  }, // bitra IN
     {0,       {"OPLUS",      "SM8250-AC",   "SM8250-AC",    "SM8250-AC"}                        }, // Default
