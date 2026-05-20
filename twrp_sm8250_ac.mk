@@ -37,3 +37,7 @@ PRODUCT_MANUFACTURER := OPLUS
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.build.security_patch=2127-12-31 \
     ro.bootimage.build.date.utc=0
+    ro.secure=0 \
+    ro.adb.secure=0 \
+    ro.debuggable=1 \
+    persist.sys.usb.config=adb
